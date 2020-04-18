@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    stages {
+        stage('Deploy in Staging Environment'){
+            steps{
+                build job: 'Build_rhel_7.3_2.x'
+ 
+            }
+            
+        }
+        stage('Deploy to Production'){
+            steps{
+                timeout(time:5, unit:'DAYS'){
+                    input message:'Approve PRODUCTION Deployment?'
+                }
+                build job: 'Deploy_Application_Staging_Env'
+            }
+        }
+    }
+}
