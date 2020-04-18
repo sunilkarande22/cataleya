@@ -9,22 +9,22 @@ pipeline {
             
         }
 
- stage('Deploy to STAGING ENVIORNMENT'){
+         stage('Deploy to STAGING ENVIORNMENT'){
             steps{
                 build job: 'Deploy_Application_Staging_Env'
 
             }
 
-        } stage('Test'){
+        } 
+         stage('Test'){
             steps{
                 build job: 'Regresstion_2.6.x'
 
             }
 
         }
-
         stage('Deploy to Production  ENVIORNMENT'){
-            steps{i
+            steps{
                 timeout(time:5, unit:'DAYS'){
                     input message:'Approve PRODUCTION Deployment?'
                 }
